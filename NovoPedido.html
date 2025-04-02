@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novo Pedido - AgroSystech</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="imagens/AgroSystech (1).png" alt="">
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+
+            <div class="subContainer">
+                <div class="alignRecebedor">
+                    <input id="recebedor" type="text" placeholder="Nome do recebedor">
+                    <div class="alignData"><input id="data" type="text" placeholder="Data do Pedido"></div>
+                </div>
+                <div class="menuNew">
+                    <a href="homePage.html">
+                        <h1 class="hover">VOLTAR A PAGINA INICIAL</h1>
+                    </a>
+
+                    <a href="index.html">
+                        <h1 class="hover">IR AO HÍSTORICO</h1>
+                    </a>
+
+
+                </div>
+                <div class="list">
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Produto</th>
+                                <th>Quantidade</th>
+                                <th>Preço R$</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+
+                            <tr>
+                                <td>Abacaxi</td>
+                                <td><input id="quantityAbacaxi" class="stylePlaceholder" type="number" placeholder="0">
+                                </td>
+                                <td><input id="priceAbacaxi" class="stylePlaceholder" type="number" placeholder="0,00">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Abacate</td>
+                                <td><input id="quantityAbacate" class="stylePlaceholder" type="number" placeholder="0">
+                                </td>
+                                <td><input id="priceAbacate" class="stylePlaceholder" type="number" placeholder="0,00">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Abobrinha</td>
+                                <td><input id="quantityAbobrinha" class="stylePlaceholder" type="number"
+                                        placeholder="0"></td>
+                                <td><input id="priceAbobrinha" class="stylePlaceholder" type="number"
+                                        placeholder="0,00"></td>
+                            </tr>
+                            <tr>
+                                <td>Abobora Japonesa</td>
+                                <td><input id="quantityAboboraJ" class="stylePlaceholder" type="number" placeholder="0">
+                                </td>
+                                <td><input id="priceAboboraJ" class="stylePlaceholder" type="number" placeholder="0,00">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Abobora D’água</td>
+                                <td><input id="quantityAboboraDagua" class="stylePlaceholder" type="number"
+                                        placeholder="0"></td>
+                                <td><input id="priceAboboraDagua" class="stylePlaceholder" type="number"
+                                        placeholder="0,00"></td>
+                            </tr>
+                            <tr>
+                                <td>Alho</td>
+                                <td><input id="quantityAlho" class="stylePlaceholder" type="number" placeholder="0">
+                                </td>
+                                <td><input id="priceAlho" class="stylePlaceholder" type="number" placeholder="0,00">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Alho Poró</td>
+                                <td><input id="quantityAlhoPoro" class="stylePlaceholder" type="number" placeholder="0">
+                                </td>
+                                <td><input id="priceAlhoPoro" class="stylePlaceholder" type="number" placeholder="0,00">
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Banana Caturra</td>
+                                <td><input id="quantityBananaCaturra" class="stylePlaceholder" type="number"
+                                        placeholder="0"></td>
+                                <td><input id="priceBananaCaturra" class="stylePlaceholder" type="number"
+                                        placeholder="0,00"></td>
+                            </tr>
+                            <tr>
+                                <td>Banana Ouro</td>
+                                <td><input id="quantityBananaOuro" class="stylePlaceholder" type="number"
+                                        placeholder="0"></td>
+                                <td><input id="priceBananaOuro" class="stylePlaceholder" type="number"
+                                        placeholder="0,00"></td>
+                            </tr>
+                            <tr>
+                                <td>Banana Prata</td>
+                                <td><input id="quantityBananaPrata" class="stylePlaceholder" type="number"
+                                        placeholder="0"></td>
+                                <td><input id="priceBananaPrata" class="stylePlaceholder" type="number"
+                                        placeholder="0,00"></td>
+                            </tr>
+                            <tr>
+                                <td>Banana Terra</td>
+                                <td><input id="quantityBananaTerra" class="stylePlaceholder" type="number"
+                                        placeholder="0"></td>
+                                <td><input id="priceBananaTerra" class="stylePlaceholder" type="number"
+                                        placeholder="0,00"></td>
+                            </tr>
+                            <tr>
+                                <td>Baroa</td>
+                                <td><input id="quantityBaroa" class="stylePlaceholder" type="number" placeholder="0">
+                                </td>
+                                <td><input id="priceBaroa" class="stylePlaceholder" type="number" placeholder="0,00">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Berinjela</td>
+                                <td><input id="quantityBerinjela" class="stylePlaceholder" type="number"
+                                        placeholder="0"></td>
+                                <td><input id="priceBerinjela" class="stylePlaceholder" type="number"
+                                        placeholder="0,00"></td>
+                            </tr>
+                            <tr>
+                                <td>Beterraba</td>
+                                <td><input id="quantityBeterraba" class="stylePlaceholder" type="number"
+                                        placeholder="0"></td>
+                                <td><input id="priceBeterraba" class="stylePlaceholder" type="number"
+                                        placeholder="0,00"></td>
+                            </tr>
+                            <tr>
+                                <td>Brócolis</td>
+                                <td><input id="quantityBrocolis" class="stylePlaceholder" type="number" placeholder="0">
+                                </td>
+                                <td><input id="priceBrocolis" class="stylePlaceholder" type="number" placeholder="0,00">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Cenoura</td>
+                                <td><input id="quantityCenoura" class="stylePlaceholder" type="number" placeholder="0">
+                                </td>
+                                <td><input id="priceCenoura" class="stylePlaceholder" type="number" placeholder="0,00">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Cenoura M</td>
+                                <td><input id="quantityCenouraM" class="stylePlaceholder" type="number" placeholder="0">
+                                </td>
+                                <td><input id="priceCenouraM" class="stylePlaceholder" type="number" placeholder="0,00">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Chuchu</td>
+                                <td><input id="quantityChuchu" class="stylePlaceholder" type="number" placeholder="0">
+                                </td>
+                                <td><input id="priceChuchu" class="stylePlaceholder" type="number" placeholder="0,00">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Couve-Flor</td>
+                                <td><input id="quantityCouveFlor" class="stylePlaceholder" type="number"
+                                        placeholder="0"></td>
+                                <td><input id="priceCouveFlor" class="stylePlaceholder" type="number"
+                                        placeholder="0,00"></td>
+                            </tr>
+                            <tr>
+                                <td>Goiaba</td>
+                                <td><input id="quantityGoiaba" class="stylePlaceholder" type="number" placeholder="0">
+                                </td>
+                                <td><input id="priceGoiaba" class="stylePlaceholder" type="number" placeholder="0,00">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Inhame</td>
+                                <td><input id="quantityInhame" class="stylePlaceholder" type="number" placeholder="0">
+                                </td>
+                                <td><input id="priceInhame" class="stylePlaceholder" type="number" placeholder="0,00">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Jiló</td>
+                                <td><input id="quantityJilo" class="stylePlaceholder" type="number" placeholder="0">
+                                </td>
+                                <td><input id="priceJilo" class="stylePlaceholder" type="number" placeholder="0,00">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Limão</td>
+                                <td><input id="quantityLimao" class="stylePlaceholder" type="number" placeholder="0">
+                                </td>
+                                <td><input id="priceLimao" class="stylePlaceholder" type="number" placeholder="0,00">
+                                </td>
+                            </tr>
+                            <td>Maracujá</td>
+                            <td><input id="quantityMaracuja" class="stylePlaceholder" type="number" placeholder="0">
+                            </td>
+                            <td><input id="priceMaracuja" class="stylePlaceholder" type="number" placeholder="0,00">
+                            </td>
+                            </tr>
+                            <tr>
+                                <td>Milho</td>
+                                <td><input id="quantityMilho" class="stylePlaceholder" type="number" placeholder="0">
+                                </td>
+                                <td><input id="priceMilho" class="stylePlaceholder" type="number" placeholder="0,00">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Manga Palmer</td>
+                                <td><input id="quantityMangaPalmer" class="stylePlaceholder" type="number"
+                                        placeholder="0"></td>
+                                <td><input id="priceMangaPalmer" class="stylePlaceholder" type="number"
+                                        placeholder="0,00"></td>
+                            </tr>
+                            <tr>
+                                <td>Mandioca</td>
+                                <td><input id="quantityMandioca" class="stylePlaceholder" type="number" placeholder="0">
+                                </td>
+                                <td><input id="priceMandioca" class="stylePlaceholder" type="number" placeholder="0,00">
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Manga Tommy</td>
+                                <td><input id="quantityMangaTommy" class="stylePlaceholder" type="number"
+                                        placeholder="0"></td>
+                                <td><input id="priceMangaTommy" class="stylePlaceholder" type="number"
+                                        placeholder="0,00"></td>
+                            </tr>
+                            <tr>
+                                <td>Mamão Havaí</td>
+                                <td><input id="quantityMamaoHavai" class="stylePlaceholder" type="number"
+                                        placeholder="0"></td>
+                                <td><input id="priceMamaoHavai" class="stylePlaceholder" type="number"
+                                        placeholder="0,00"></td>
+                            </tr>
+                            <tr>
+                                <td>Mamão Formosa</td>
+                                <td><input id="quantityMamaoFormosa" class="stylePlaceholder" type="number"
+                                        placeholder="0"></td>
+                                <td><input id="priceMamaoFormosa" class="stylePlaceholder" type="number"
+                                        placeholder="0,00"></td>
+                            </tr>
+                            <tr>
+                                <td>Melão Amarelo</td>
+                                <td><input id="quantityMelaoAmarelo" class="stylePlaceholder" type="number"
+                                        placeholder="0"></td>
+                                <td><input id="priceMelaoAmarelo" class="stylePlaceholder" type="number"
+                                        placeholder="0,00"></td>
+                            </tr>
+                            <tr>
+                                <td>Melancia</td>
+                                <td><input id="quantityMelancia" class="stylePlaceholder" type="number" placeholder="0">
+                                </td>
+                                <td><input id="priceMelancia" class="stylePlaceholder" type="number" placeholder="0,00">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Pimentão</td>
+                                <td><input id="quantityPimentao" class="stylePlaceholder" type="number" placeholder="0">
+                                </td>
+                                <td><input id="pricePimentao" class="stylePlaceholder" type="number" placeholder="0,00">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Pimentão Colorido</td>
+                                <td><input id="quantityPimentaoColorido" class="stylePlaceholder" type="number"
+                                        placeholder="0"></td>
+                                <td><input id="pricePimentaoColorido" class="stylePlaceholder" type="number"
+                                        placeholder="0,00"></td>
+                            </tr>
+                            <tr>
+                                <td>Pepino Preto</td>
+                                <td><input id="quantityPepinoPreto" class="stylePlaceholder" type="number"
+                                        placeholder="0"></td>
+                                <td><input id="pricePepinoPreto" class="stylePlaceholder" type="number"
+                                        placeholder="0,00"></td>
+                            </tr>
+                            <tr>
+                                <td>Pepino Caipira</td>
+                                <td><input id="quantityPepinoCaipira" class="stylePlaceholder" type="number"
+                                        placeholder="0">
+                                </td>
+                                <td><input id="pricePepinoCaipira" class="stylePlaceholder" type="number"
+                                        placeholder="0,00">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Pepino Japonês</td>
+                                <td><input id="quantityPepinoJapones" class="stylePlaceholder" type="number"
+                                        placeholder="0"></td>
+                                <td><input id="pricePepinoJapones" class="stylePlaceholder" type="number"
+                                        placeholder="0,00"></td>
+                            </tr>
+                            <tr>
+                                <td>Pitaya</td>
+                                <td><input id="quantityPitaya" class="stylePlaceholder" type="number" placeholder="0">
+                                </td>
+                                <td><input id="pricePitaya" class="stylePlaceholder" type="number" placeholder="0,00">
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Quiabo</td>
+                                <td><input id="quantityQuiabo" class="stylePlaceholder" type="number" placeholder="0">
+                                </td>
+                                <td><input id="priceQuiabo" class="stylePlaceholder" type="number" placeholder="0,00">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Repolho</td>
+                                <td><input id="quantityRepolho" class="stylePlaceholder" type="number" placeholder="0">
+                                </td>
+                                <td><input id="priceRepolho" class="stylePlaceholder" type="number" placeholder="0,00">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Repolho Roxo</td>
+                                <td><input id="quantityRepolhoRoxo" class="stylePlaceholder" type="number"
+                                        placeholder="0">
+                                </td>
+                                <td><input id="priceRepolhoRoxo" class="stylePlaceholder" type="number"
+                                        placeholder="0,00">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Tomate Italiano</td>
+                                <td><input id="quantityTomateItaliano" class="stylePlaceholder" type="number"
+                                        placeholder="0"></td>
+                                <td><input id="priceTomateItaliano" class="stylePlaceholder" type="number"
+                                        placeholder="0,00"></td>
+                            </tr>
+                            <tr>
+                                <td>Tomate G</td>
+                                <td><input id="quantityTomateG" class="stylePlaceholder" type="number" placeholder="0">
+                                </td>
+                                <td><input id="priceTomateG" class="stylePlaceholder" type="number" placeholder="0,00">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Tomate M</td>
+                                <td><input id="quantityTomateM" class="stylePlaceholder" type="number" placeholder="0">
+                                </td>
+                                <td><input id="priceTomateM" class="stylePlaceholder" type="number" placeholder="0,00">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Tomate Cereja</td>
+                                <td><input id="quantityTomateCereja" class="stylePlaceholder" type="number"
+                                        placeholder="0"></td>
+                                <td><input id="priceTomateCereja" class="stylePlaceholder" type="number"
+                                        placeholder="0,00"></td>
+                            </tr>
+                            <tr>
+                                <td>Vagem</td>
+                                <td><input id="quantityVagem" class="stylePlaceholder" type="number" placeholder="0">
+                                </td>
+                                <td><input id="priceVagem" class="stylePlaceholder" type="number" placeholder="0,00">
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td>TOTAL =</td>
+                                <td><input id="quantityTotal" class="stylePlaceholder" type="number" placeholder="0">
+                                </td>
+                                <td><input id="priceTotal" class="stylePlaceholder" type="number" placeholder="0,00">
+                                </td>
+                            </tr>
+
+                        </tbody>
+                        <td><button id="gerarPDF">Gerar PDF</button></td>
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+        <div class="alignRecebedor">
+            <button id="salvarPedido">Salvar Pedido</button>
+        </div>
+        </div>
+
+        <!-- Filtro de Pesquisa de Pedidos -->
+
+        </div>
+        </div>
+    </main>
+    <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</body>
+
+</html>
