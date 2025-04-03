@@ -17,11 +17,13 @@ let produtos = [
   "Cenoura",
   "CenouraM",
   "Chuchu",
-  "CouveFlor",
+  "Couve-Flor",
+  "Coco-Seco",
   "Goiaba",
   "Inhame",
   "Jilo",
-  "AboboraJ",
+  "AboboraJaponesa",
+  "CebolaRoxa",
   "TomateG",
   "TomateM",
   "PepinoCaipira",
@@ -97,7 +99,6 @@ function salvarPedido() {
   localStorage.setItem("pedidos", JSON.stringify(pedidos));
 }
 
-// Gerar PDF e salvar pedido
 document.getElementById("gerarPDF").addEventListener("click", function () {
   const { jsPDF } = window.jspdf;
   let doc = new jsPDF();
@@ -105,28 +106,53 @@ document.getElementById("gerarPDF").addEventListener("click", function () {
   let recebedor = document.getElementById("recebedor").value || "Não informado";
   let data = document.getElementById("data").value || "Não informado";
 
-  doc.setFont("helvetica", "bold");
-  doc.text("Pedido - AgroSystech", 20, 20);
-  doc.text("Celinho HortiFruti", 20, 20);
-  doc.setFont("helvetica", "normal");
-  doc.text(`Recebedor: ${recebedor}`, 20, 30);
-  doc.text(`Data: ${data}`, 20, 40);
-  doc.text("Produtos:", 20, 50);
+  // Inserindo a logo no topo do PDF (substitua "logo.png" pela sua imagem)
+  let img = new Image();
+  img.src = "imagens/AgroSystech (1).png"; // Caminho da sua logo
+  img.onload = function () {
+    doc.addImage(img, "PNG", 150, 10, 40, 20); // Posição e tamanho da logo
 
-  let y = 60;
-  produtos.forEach((produto) => {
-    const getProduto = document.getElementById("quantity" + produto);
-    console.log(getProduto, produto);
-    let quantity = document.getElementById("quantity" + produto).value || "0";
-    let price = document.getElementById("price" + produto).value || "0.00";
-    if (parseInt(quantity) > 0) {
-      doc.text(`${quantity} - ${produto} , R$ ${price}`, 20, y);
-      y += 10;
-    }
-  });
+    doc.setFont("helvetica", "bold");
+    doc.text("Pedido - Celinho Legumes", 20, 20);
 
-  doc.text(`TOTAL: ${quantityTotal.value} volumes, R$ ${priceTotal.value}`, 20, y + 10);
-  doc.save(`pedido-${recebedor}-${data}.pdf`);
+    doc.setFont("helvetica", "normal");
+    doc.text(`Recebedor: ${recebedor}`, 20, 30);
+    doc.text(`Data: ${data}`, 20, 40);
+    doc.text("Produtos:", 20, 50);
 
-  salvarPedido(); // Salva o pedido após gerar o PDF
+    let y = 60;
+    let x = 20;
+    let lineCount = 0;
+
+    produtos.forEach((produto) => {
+      let quantityEl = document.getElementById("quantity" + produto);
+      let priceEl = document.getElementById("price" + produto);
+
+      if (!quantityEl || !priceEl) return;
+
+      let quantity = quantityEl.value || "0";
+      let price = priceEl.value || "0.00";
+
+      if (parseFloat(quantity) > 0) {
+        // Só adiciona se o preço for maior que 0
+        if (parseInt(quantity) < 10) {
+          quantity = `0${quantity}`; // Adiciona ")" antes da quantidade se menor que 10
+        }
+
+        doc.text(`${quantity} - ${produto}, R$ ${price}`, x, y);
+        y += 10;
+        lineCount++;
+
+        if (lineCount === 23) {
+          x += 90; // Move para a direita da folha
+          y = 60; // Reinicia a altura
+          lineCount = 0; // Reinicia a contagem
+        }
+      }
+    });
+    doc.text(`TOTAL: ${quantityTotal.value} volumes, R$ ${priceTotal.value}`, 105, y + 10);
+    doc.save(`pedido-${recebedor}-${data}.pdf`);
+
+    salvarPedido(); // Salva o pedido após gerar o PDF
+  };
 });
