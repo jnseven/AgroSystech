@@ -14,6 +14,7 @@ let produtos = [
   "Berinjela",
   "Beterraba",
   "Brocolis",
+  "Gengibre",
   "Cenoura",
   "CenouraM",
   "Chuchu",
@@ -39,6 +40,8 @@ let produtos = [
   "MelaoAmarelo",
   "MangaPalmer",
   "MangaTommy",
+  "BatataDoce",
+  "BatataInglesa",
   "PepinoPreto",
   "PepinoJapones",
   "Pitaya",
@@ -49,10 +52,20 @@ let produtos = [
   "Vagem",
 ];
 
+const semRetornavel = [
+  "Alho",
+  "AlhoPoro",
+  "BatataInglesa",
+  "CebolaRoxa",
+  "Coco-Seco",
+  "Repolho",
+  "RepolhoRoxo",
+  "Melancia",
+];
+
 let quantityTotal = document.getElementById("quantityTotal");
 let priceTotal = document.getElementById("priceTotal");
 
-// Função para calcular o total
 function calcularTotal() {
   let totalQuantidade = 0;
   let totalPreco = 0;
@@ -66,11 +79,19 @@ function calcularTotal() {
     }
   });
 
+  // Lógica especial da melancia
+  const melanciaUnidades = parseInt(document.getElementById("melancia-qtd").value) || 0;
+  const melanciaKG = parseFloat(document.getElementById("melancia-kg").value) || 0;
+  const melanciaPreco = parseFloat(document.getElementById("melancia-preco").value) || 0;
+
+  totalQuantidade += melanciaUnidades;
+  totalPreco += melanciaKG * melanciaPreco;
+
   quantityTotal.value = totalQuantidade;
   priceTotal.value = totalPreco.toFixed(2);
 }
 
-// Adiciona o evento de "input" para atualizar os totais
+// Eventos de input para todos os produtos
 produtos.forEach((produto) => {
   let quantity = document.getElementById("quantity" + produto);
   let price = document.getElementById("price" + produto);
@@ -80,7 +101,12 @@ produtos.forEach((produto) => {
   }
 });
 
-// Função para salvar o pedido no localStorage
+// Eventos de input para melancia
+["melancia-qtd", "melancia-kg", "melancia-preco"].forEach((id) => {
+  const input = document.getElementById(id);
+  if (input) input.addEventListener("input", calcularTotal);
+});
+
 function salvarPedido() {
   const pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
   const recebedor = document.getElementById("recebedor").value || "Não informado";
@@ -95,6 +121,15 @@ function salvarPedido() {
     }
   });
 
+  // Salva também melancia
+  const melanciaQtd = parseInt(document.getElementById("melancia-qtd").value) || 0;
+  const melanciaKG = parseFloat(document.getElementById("melancia-kg").value) || 0;
+  const melanciaPreco = parseFloat(document.getElementById("melancia-preco").value) || 0;
+
+  if (melanciaQtd > 0 && melanciaKG > 0 && melanciaPreco > 0) {
+    itensPedido.push({ produto: "Melancia", quantity: `${melanciaQtd} un`, price: melanciaPreco.toFixed(2) });
+  }
+
   pedidos.push({ recebedor, data, itensPedido, total: priceTotal.value });
   localStorage.setItem("pedidos", JSON.stringify(pedidos));
 }
@@ -103,26 +138,31 @@ document.getElementById("gerarPDF").addEventListener("click", function () {
   const { jsPDF } = window.jspdf;
   let doc = new jsPDF();
 
-  let recebedor = document.getElementById("recebedor").value || "Não informado";
-  let data = document.getElementById("data").value || "Não informado";
+  const recebedor = document.getElementById("recebedor").value || "Não informado";
+  const data = document.getElementById("data").value || "Não informado";
 
-  // Inserindo a logo no topo do PDF (substitua "logo.png" pela sua imagem)
   let img = new Image();
-  img.src = "imagens/AgroSystech (1).png"; // Caminho da sua logo
+  img.src = "imagens/AgroSystech (1).png";
   img.onload = function () {
-    doc.addImage(img, "PNG", 150, 10, 40, 20); // Posição e tamanho da logo
+    doc.addImage(img, "PNG", 140, 10, 50, 15);
 
     doc.setFont("helvetica", "bold");
+    doc.setFontSize(12);
     doc.text("Pedido - Celinho Legumes", 20, 20);
 
     doc.setFont("helvetica", "normal");
+    doc.setFontSize(10);
     doc.text(`Recebedor: ${recebedor}`, 20, 30);
-    doc.text(`Data: ${data}`, 20, 40);
-    doc.text("Produtos:", 20, 50);
+    doc.text(`Data: ${data}`, 20, 35);
+    doc.text("Produtos:", 20, 45);
 
-    let y = 60;
+    let y = 50;
     let x = 20;
     let lineCount = 0;
+    let columnCount = 0;
+    let totalVolumes = 0;
+    let caixasPlasticas = 0;
+    let semRetornaveis = 0;
 
     produtos.forEach((produto) => {
       let quantityEl = document.getElementById("quantity" + produto);
@@ -130,29 +170,65 @@ document.getElementById("gerarPDF").addEventListener("click", function () {
 
       if (!quantityEl || !priceEl) return;
 
-      let quantity = quantityEl.value || "0";
-      let price = priceEl.value || "0.00";
+      let quantity = parseInt(quantityEl.value) || 0;
+      let price = parseFloat(priceEl.value) || 0.0;
 
-      if (parseFloat(quantity) > 0) {
-        // Só adiciona se o preço for maior que 0
-        if (parseInt(quantity) < 10) {
-          quantity = `0${quantity}`; // Adiciona ")" antes da quantidade se menor que 10
+      if (quantity > 0) {
+        let subtotal = quantity * price;
+        totalVolumes += quantity;
+
+        if (semRetornavel.includes(produto)) {
+          semRetornaveis += quantity;
+        } else {
+          caixasPlasticas += quantity;
         }
 
-        doc.text(`${quantity} - ${produto}, R$ ${price}`, x, y);
-        y += 10;
-        lineCount++;
+        let formattedQuantity = quantity < 10 ? `0${quantity}` : quantity;
+        doc.text(
+          `${formattedQuantity} - ${produto}, R$ ${price.toFixed(2)} (Subtotal: R$ ${subtotal.toFixed(2)})`,
+          x,
+          y
+        );
 
-        if (lineCount === 23) {
-          x += 90; // Move para a direita da folha
-          y = 60; // Reinicia a altura
-          lineCount = 0; // Reinicia a contagem
+        y += 6;
+        lineCount++;
+        if (lineCount === 30) {
+          x += 90;
+          y = 50;
+          lineCount = 0;
+          columnCount++;
         }
       }
     });
-    doc.text(`TOTAL: ${quantityTotal.value} volumes, R$ ${priceTotal.value}`, 105, y + 10);
-    doc.save(`pedido-${recebedor}-${data}.pdf`);
 
-    salvarPedido(); // Salva o pedido após gerar o PDF
+    // Melancia separada
+    const melanciaQtd = parseInt(document.getElementById("melancia-qtd").value) || 0;
+    const melanciaKG = parseFloat(document.getElementById("melancia-kg").value) || 0;
+    const melanciaPreco = parseFloat(document.getElementById("melancia-preco").value) || 0;
+
+    if (melanciaQtd > 0 && melanciaKG > 0 && melanciaPreco > 0) {
+      const subtotal = melanciaKG * melanciaPreco;
+      doc.text(
+        `${melanciaQtd} - Melancia (${melanciaKG.toFixed(2)} KG x R$ ${melanciaPreco.toFixed(
+          2
+        )}) (Subtotal: R$ ${subtotal.toFixed(2)})`,
+        x,
+        y
+      );
+      y += 6;
+      lineCount++;
+
+      totalVolumes += melanciaQtd;
+      semRetornaveis += melanciaQtd;
+    }
+
+    let volumesTexto = `${totalVolumes} volumes (${caixasPlasticas} caixas plásticas, ${semRetornaveis} sem embalagens retornáveis)`;
+
+    doc.setFontSize(13);
+    doc.setFont("helvetica", "bold");
+    doc.text(`TOTAL: ${volumesTexto}, R$ ${priceTotal.value}`, 10, 250);
+
+    doc.save(`pedido-${recebedor}-${data}.pdf`);
+    salvarPedido();
   };
 });
